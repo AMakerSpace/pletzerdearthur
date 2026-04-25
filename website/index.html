@@ -2,14 +2,19 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>Arthur – Retro Mac</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arthur Pletzer – AMakerSpace</title>
+<link rel="icon" type="image/png" href="amakerspace.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
 
 <style>
     body {
         margin: 0;
         height: 100vh;
         background: linear-gradient(135deg, #cfcfcf, #a9a9a9);
-        font-family: "Chicago", "Geneva", "Courier New", monospace;
+        font-family: 'Pixelify Sans', "Chicago", "Geneva", "Courier New", monospace;
     }
 
     /* ===== MENU BAR ===== */
@@ -32,6 +37,15 @@
     .menu-left span {
         margin-right: 16px;
         font-weight: bold;
+        cursor: default;
+    }
+
+    .menu-left span.menu-clickable {
+        cursor: pointer;
+    }
+
+    .menu-left span.menu-clickable:hover {
+        text-decoration: underline;
     }
 
     .menu-right {
@@ -126,6 +140,14 @@
         z-index: 1;
     }
 
+    #links {
+        width: 300px;
+        top: 50%;
+        left: 50%;
+        transform: translate(0%, -120%);
+        z-index: 0;
+    }
+
     /* ===== PHOTO ===== */
     .photo {
         border: 2px inset #888;
@@ -161,6 +183,231 @@
     .qa-item.open .qa-answer {
         display: block;
     }
+
+    /* ===== LINKS ===== */
+    .link-button {
+        display: inline-block;
+        padding: 8px 12px;
+        color: white;
+        text-decoration: none;
+        border: 2px inset;
+        font-weight: bold;
+        margin-top: 8px;
+        margin-right: 8px;
+    }
+
+    .link-button:hover {
+        opacity: 0.9;
+    }
+
+    .link-youtube {
+        background-color: #ff0000;
+        border-color: #cc0000;
+    }
+
+    .link-youtube:hover {
+        background-color: #cc0000;
+    }
+
+    .link-podcast {
+        background-color: #D900FF;
+        border-color: #B800CC;
+    }
+
+    .link-podcast:hover {
+        background-color: #B800CC;
+    }
+
+    .link-printables {
+        background-color: #FF6F00;
+        border-color: #CC5A00;
+    }
+
+    .link-printables:hover {
+        background-color: #CC5A00;
+    }
+
+    /* ===== OVERLAY ===== */
+    .overlay-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.3);
+        z-index: 2000;
+        display: none;
+    }
+
+    .overlay-backdrop.show {
+        display: block;
+    }
+
+    .overlay-window {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #e6e6e6;
+        border: 2px solid black;
+        box-shadow: 4px 4px 0 #666;
+        width: 600px;
+        max-width: 90vw;
+        max-height: 80vh;
+        overflow-y: auto;
+        z-index: 2001;
+        display: none;
+    }
+
+    .overlay-window.show {
+        display: block;
+    }
+
+    .overlay-window .content {
+        max-height: calc(80vh - 50px);
+        overflow-y: auto;
+    }
+
+    /* ===== RESPONSIVE DESIGN ===== */
+    @media (max-width: 1024px) and (min-width: 769px) {
+        /* Tablet: Fenster etwas näher zusammen */
+        #about {
+            transform: translate(-80%, -50%);
+        }
+
+        #photo {
+            transform: translate(80%, -60%);
+        }
+
+        #qa {
+            transform: translate(0%, 50%);
+        }
+
+        #links {
+            transform: translate(0%, -100%);
+        }
+    }
+
+    @media (max-width: 768px) {
+        body {
+            overflow-y: auto;
+        }
+
+        .menu-bar {
+            font-size: 11px;
+            padding: 0 6px;
+        }
+
+        .menu-left span {
+            margin-right: 8px;
+        }
+
+        .menu-right {
+            font-size: 10px;
+        }
+
+        .desktop {
+            padding-top: 26px;
+            min-height: 100vh;
+            padding-bottom: 20px;
+        }
+
+        /* Fenster werden vertikal gestapelt */
+        .window {
+            position: relative;
+            width: calc(100% - 20px) !important;
+            max-width: 100%;
+            margin: 15px auto;
+            transform: none !important;
+            top: auto !important;
+            left: auto !important;
+        }
+
+        #about {
+            width: calc(100% - 20px);
+        }
+
+        #photo {
+            width: calc(100% - 20px);
+        }
+
+        #qa {
+            width: calc(100% - 20px);
+        }
+
+        #links {
+            width: calc(100% - 20px);
+        }
+
+        .content {
+            padding: 10px;
+            font-size: 13px;
+        }
+
+        .title {
+            font-size: 12px;
+            padding: 2px 8px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .menu-bar {
+            font-size: 10px;
+            height: 24px;
+        }
+
+        .menu-left span {
+            margin-right: 6px;
+        }
+
+        .menu-right {
+            display: none; /* Kontakt-Info auf sehr kleinen Bildschirmen ausblenden */
+        }
+
+        .desktop {
+            padding-top: 24px;
+        }
+
+        .window {
+            margin: 10px auto;
+            width: calc(100% - 16px) !important;
+        }
+
+        .content {
+            padding: 8px;
+            font-size: 12px;
+        }
+
+        .title {
+            font-size: 11px;
+        }
+
+        .qa-question {
+            font-size: 12px;
+            padding: 5px;
+        }
+
+        .qa-answer {
+            font-size: 11px;
+            padding: 5px;
+        }
+
+        .overlay-window {
+            width: calc(100% - 20px);
+            max-width: 95vw;
+        }
+    }
+
+    /* Für sehr große Bildschirme - Fenster etwas näher zusammen */
+    @media (min-width: 1400px) {
+        #about {
+            transform: translate(-100%, -50%);
+        }
+
+        #photo {
+            transform: translate(100%, -60%);
+        }
+    }
 </style>
 </head>
 
@@ -168,12 +415,12 @@
 
 <div class="menu-bar">
     <div class="menu-left">
-        <span></span>
+        <span style="display: inline-flex; align-items: center; margin-right: 16px;"><img src="amakerspace.png" alt="AMakerSpace" style="width: 16px; height: 16px; vertical-align: middle;"></span>
         <span>Finder</span>
         <span>File</span>
         <span>Edit</span>
         <span>View</span>
-        <span>About</span>
+        <span class="menu-clickable" id="menu-about">About</span>
     </div>
     <div class="menu-right">
         Kontakt: makerspacemanagement@icloud.com
@@ -254,14 +501,79 @@
         </div>
     </div>
 
+    <!-- LINKS -->
+    <div class="window" id="links">
+        <div class="title-bar">
+            <div class="window-buttons">
+                <div class="btn close"></div>
+                <div class="btn min"></div>
+                <div class="btn zoom"></div>
+            </div>
+            <div class="title">Links</div>
+        </div>
+        <div class="content">
+            <p>Besuche meine Kanäle:</p>
+            <a href="https://www.youtube.com/@AMakerSpace" target="_blank" rel="noopener noreferrer" class="link-button link-youtube">
+                🎥 @AMakerSpace
+            </a>
+            <br>
+            <a href="https://youtube.com/@Tech-Talk.Felix-Arthur" target="_blank" rel="noopener noreferrer" class="link-button link-podcast">
+                🎧 Podcast
+            </a>
+            <br>
+            <a href="https://www.printables.com/@AMakerSpace" target="_blank" rel="noopener noreferrer" class="link-button link-printables">
+                📐 Printables
+            </a>
+        </div>
+    </div>
+
+    <!-- OVERLAY FENSTER -->
+    <div class="overlay-backdrop" id="overlay-backdrop"></div>
+    <div class="overlay-window" id="overlay-window">
+        <div class="title-bar">
+            <div class="window-buttons">
+                <div class="btn close" id="overlay-close"></div>
+                <div class="btn min"></div>
+                <div class="btn zoom"></div>
+            </div>
+            <div class="title">About</div>
+        </div>
+        <div class="content">
+            <p>
+                Auf dieser Website sind zahlreiche Links zu anderen Seiten im Internet gelegt. Für alle diese Links gilt: Ich betone ausdrücklich, dass ich keinen Einfluß auf die Gestaltung und die Inhalte der gelinkten Seiten habe. Ich distanziere mich hiermit ausdrücklich von allen Inhalten aller gelinkten Seiten und mache mir deren Inhalte nicht zu Eigen. Diese Erklärung gilt für alle auf dieser Website ausgebrachten Links sowie für die Inhalte der Seiten, zu denen von diesen Seiten verlinkt wird. Alle innerhalb dieses Internetangebots genannten und ggf. durch Dritte geschützten Marken- und Warenzeichen unterliegen uneingeschränkt den Bestimmungen des jeweils gültigen Kennzeichenrechts und den Besitzrechten der jeweiligen Eigentümer.
+            </p>
+        </div>
+    </div>
+
 </div>
 
 <script>
+    // Q&A Toggle
     document.querySelectorAll(".qa-question").forEach(q => {
         q.addEventListener("click", () => {
             q.parentElement.classList.toggle("open");
         });
     });
+
+    // Overlay öffnen/schließen
+    const menuAbout = document.getElementById("menu-about");
+    const overlayBackdrop = document.getElementById("overlay-backdrop");
+    const overlayWindow = document.getElementById("overlay-window");
+    const overlayClose = document.getElementById("overlay-close");
+
+    function openOverlay() {
+        overlayBackdrop.classList.add("show");
+        overlayWindow.classList.add("show");
+    }
+
+    function closeOverlay() {
+        overlayBackdrop.classList.remove("show");
+        overlayWindow.classList.remove("show");
+    }
+
+    menuAbout.addEventListener("click", openOverlay);
+    overlayClose.addEventListener("click", closeOverlay);
+    overlayBackdrop.addEventListener("click", closeOverlay);
 </script>
 
 </body>
